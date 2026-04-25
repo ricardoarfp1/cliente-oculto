@@ -1,168 +1,177 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação de Cliente Oculto</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 500px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="date"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        textarea {
-            height: 100px;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        #message {
-            margin-top: 15px;
-            text-align: center;
-            display: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cliente Oculto — Valor Soluções Empresariais</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--valor-dark:#1a1a2e;--valor-gold:#c9a84c;--valor-gold-light:#e8c97a;--valor-gold-pale:#f5edd6;--valor-slate:#2d3748;--valor-mid:#4a5568;--valor-light:#718096;--valor-bg:#f8f6f0;--valor-white:#ffffff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--valor-bg);min-height:100vh}
+.vl-header{background:var(--valor-dark);position:relative;overflow:hidden}
+.vl-header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--valor-gold) 0%,var(--valor-gold-light) 50%,var(--valor-gold) 100%)}
+.vl-header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 28px}
+.vl-brand{display:flex;align-items:center;gap:14px}
+.vl-logo-mark{width:42px;height:42px;background:var(--valor-gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--valor-dark);letter-spacing:-1px}
+.vl-brand-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:#fff;letter-spacing:.5px}
+.vl-brand-sub{font-size:10px;color:var(--valor-gold);text-transform:uppercase;letter-spacing:2px;font-weight:500}
+.vl-tool-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--valor-gold);text-align:right}
+.vl-tool-sub{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;text-align:right}
+.vl-progress-bar{height:2px;background:rgba(255,255,255,.1)}
+.vl-progress-fill{height:100%;background:var(--valor-gold);width:0%;transition:width .4s ease}
+.vl-steps-nav{background:var(--valor-dark);display:flex;align-items:center;padding:0 28px 16px;gap:4px;overflow-x:auto}
+.vl-step-pill{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;color:rgba(255,255,255,.4);border:1px solid transparent;flex-shrink:0}
+.vl-step-pill.active{background:var(--valor-gold);color:var(--valor-dark)}
+.vl-step-pill.done{color:var(--valor-gold);border-color:rgba(201,168,76,.3)}
+.vl-step-num{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;background:rgba(255,255,255,.1)}
+.vl-step-pill.active .vl-step-num{background:rgba(26,26,46,.3)}
+.vl-step-pill.done .vl-step-num{background:rgba(201,168,76,.2)}
+.vl-main{padding:24px 28px;max-width:860px;margin:0 auto}
+.vl-section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px}
+.vl-section-icon{width:44px;height:44px;flex-shrink:0;background:var(--valor-dark);display:flex;align-items:center;justify-content:center;font-size:20px}
+.vl-section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--valor-dark);line-height:1.2}
+.vl-section-desc{font-size:12px;color:var(--valor-light);margin-top:3px;line-height:1.4}
+.vl-card{background:var(--valor-white);border:1px solid #e2d9c0;border-radius:2px;margin-bottom:12px;overflow:hidden}
+.vl-card-label{padding:14px 16px 10px;font-size:13px;font-weight:600;color:var(--valor-slate);border-bottom:1px solid #f0ebe0;display:flex;justify-content:space-between;align-items:center}
+.vl-card-body{padding:14px 16px}
+.vl-rating-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.vl-opt{padding:7px 14px;border:1px solid #d4c9a8;border-radius:2px;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:var(--valor-mid);transition:all .15s;line-height:1;font-family:'DM Sans',sans-serif}
+.vl-opt:hover{border-color:var(--valor-gold);color:var(--valor-dark)}
+.vl-opt.sel{background:var(--valor-dark);border-color:var(--valor-dark);color:var(--valor-gold);font-weight:600}
+.vl-opt.sel-crit{background:#fff5f5;border-color:#c53030;color:#c53030}
+.vl-opt.sel-warn{background:#fffbf0;border-color:#b7791f;color:#b7791f}
+.vl-opt.sel-good{background:#f0fff4;border-color:#276749;color:#276749}
+.vl-opt.sel-best{background:var(--valor-dark);border-color:var(--valor-gold);color:var(--valor-gold)}
+.vl-field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.vl-field{display:flex;flex-direction:column;gap:5px}
+.vl-field label{font-size:11px;font-weight:600;color:var(--valor-mid);text-transform:uppercase;letter-spacing:.8px}
+.vl-field input,.vl-field select,.vl-field textarea{padding:8px 10px;border:1px solid #d4c9a8;border-radius:2px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--valor-dark);background:var(--valor-white);outline:none;transition:border-color .15s}
+.vl-field input:focus,.vl-field select:focus,.vl-field textarea:focus{border-color:var(--valor-gold)}
+.vl-score-badge{display:inline-flex;align-items:center;background:var(--valor-gold-pale);border:1px solid var(--valor-gold);padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;color:var(--valor-dark)}
+.vl-textarea{width:100%;min-height:80px;resize:vertical}
+.vl-score-panel{background:var(--valor-dark);padding:20px 24px;border-radius:2px;margin-bottom:20px;position:relative;overflow:hidden}
+.vl-score-panel::after{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;border:2px solid rgba(201,168,76,.15);border-radius:50%}
+.vl-score-grid{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+.vl-big-num{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;color:var(--valor-gold);line-height:1}
+.vl-big-label{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+.vl-big-concept{font-size:14px;font-weight:600;margin-top:6px;padding:4px 12px;border-radius:20px;display:inline-block}
+.concept-critico{background:#7f1d1d;color:#fca5a5}
+.concept-regular{background:#78350f;color:#fcd34d}
+.concept-bom{background:#1e3a5f;color:#93c5fd}
+.concept-excelente{background:#14532d;color:#86efac}
+.vl-dim-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.vl-dim-name{font-size:11px;color:rgba(255,255,255,.6);width:110px;flex-shrink:0}
+.vl-dim-bar-bg{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.vl-dim-bar-fill{height:100%;border-radius:2px;background:var(--valor-gold);transition:width .5s ease}
+.vl-dim-score{font-size:11px;font-weight:600;color:var(--valor-gold);width:28px;text-align:right}
+.vl-insight{background:var(--valor-white);border:1px solid #e2d9c0;border-left:3px solid var(--valor-gold);padding:16px;border-radius:2px;margin-bottom:20px}
+.vl-insight-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--valor-gold);margin-bottom:8px}
+.vl-insight-body{font-size:13px;color:var(--valor-mid);line-height:1.6}
+.vl-action-item{display:flex;gap:8px;margin-top:6px;font-size:12px;color:var(--valor-slate);align-items:flex-start}
+.vl-action-bullet{color:var(--valor-gold);font-weight:600;flex-shrink:0}
+.vl-nav{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid #e2d9c0}
+.vl-btn{padding:10px 22px;border:1px solid var(--valor-dark);background:transparent;color:var(--valor-dark);font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .15s;font-family:'DM Sans',sans-serif}
+.vl-btn:hover{background:var(--valor-dark);color:var(--valor-gold)}
+.vl-btn-primary{background:var(--valor-dark);color:var(--valor-gold);border-color:var(--valor-dark)}
+.vl-btn-primary:hover{background:#0d0d1a}
+.vl-btn-gold{background:var(--valor-gold);color:var(--valor-dark);border-color:var(--valor-gold)}
+.vl-btn-gold:hover{background:var(--valor-gold-light)}
+.vl-type-selector{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:20px}
+.vl-type-card{padding:14px 10px;border:1px solid #d4c9a8;border-radius:2px;text-align:center;cursor:pointer;transition:all .15s;background:var(--valor-white)}
+.vl-type-card:hover{border-color:var(--valor-gold)}
+.vl-type-card.sel{border-color:var(--valor-gold);background:var(--valor-gold-pale)}
+.vl-type-icon{font-size:22px;margin-bottom:6px}
+.vl-type-label{font-size:11px;font-weight:600;color:var(--valor-slate)}
+.vl-divider{height:1px;background:#e8e0cc;margin:16px 0}
+.vl-footer{background:var(--valor-dark);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;margin-top:32px}
+.vl-footer-brand{font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px}
+.vl-footer-contact{font-size:10px;color:rgba(255,255,255,.3)}
+.vl-footer-contact span{color:var(--valor-gold)}
+.vl-seg{display:inline-block;padding:3px 10px;background:var(--valor-dark);color:var(--valor-gold);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:20px;margin-left:6px}
+@media(max-width:600px){.vl-main{padding:16px}.vl-field-row{grid-template-columns:1fr}.vl-score-grid{grid-template-columns:1fr}.vl-header-inner{padding:14px 16px}.vl-big-num{font-size:44px}.vl-steps-nav{padding:0 16px 12px}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Cliente Oculto</h1>
-        <form id="clienteOcultoForm">
-            <div class="form-group">
-                <label for="nome">Nome do Avaliador:</label>
-                <input type="text" id="nome" name="nome" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Seu Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="data">Data da Visita:</label>
-                <input type="date" id="data" name="data" required>
-            </div>
-            <div class="form-group">
-                <label for="unidade">Unidade Visitada:</label>
-                <input type="text" id="unidade" name="unidade" required>
-            </div>
-            <div class="form-group">
-                <label for="nota">Nota de 1 a 5:</label>
-                <select id="nota" name="nota" required>
-                    <option value="">Selecione...</option>
-                    <option value="1">1 - Muito Ruim</option>
-                    <option value="2">2 - Ruim</option>
-                    <option value="3">3 - Regular</option>
-                    <option value="4">4 - Bom</option>
-                    <option value="5">5 - Excelente</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="comentario">Comentários:</label>
-                <textarea id="comentario" name="comentario" required></textarea>
-            </div>
-            <button type="submit" id="submitBtn">Enviar Avaliação</button>
-        </form>
-        <div id="message"></div>
+<div id="app">
+  <div class="vl-header">
+    <div class="vl-header-inner">
+      <div class="vl-brand">
+        <div class="vl-logo-mark">V</div>
+        <div>
+          <div class="vl-brand-name">Valor Soluções Empresariais</div>
+          <div class="vl-brand-sub">Organizar para crescer</div>
+        </div>
+      </div>
+      <div>
+        <div class="vl-tool-name">Cliente Oculto</div>
+        <div class="vl-tool-sub">Plataforma de Avaliação</div>
+      </div>
     </div>
+    <div class="vl-progress-bar"><div class="vl-progress-fill" id="progressFill"></div></div>
+  </div>
+  <div class="vl-steps-nav" id="stepsNav"></div>
+  <div class="vl-main" id="mainContent"></div>
+  <div class="vl-footer">
+    <div class="vl-footer-brand">© Valor Soluções Empresariais — @ricardopintovalor</div>
+    <div class="vl-footer-contact"><span>www.valorsolucoes.com.br</span></div>
+  </div>
+</div>
+<script>
+// =====================================================
+// CONFIGURAÇÕES
+// =====================================================
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz15YpK6eGen-0QRS1KJl4x0YvcbD2Qt3_hdqABm3Jczo97SAl5L-u2BO4Gne7WDToPfQ/exec"; // Cole aqui a URL do Google Apps Script após o deploy
 
-    <script>
-        // SUBSTITUA A URL ABAIXO PELA URL DO SEU GOOGLE APPS SCRIPT APÓS PUBLICAR
-        const SCRIPT_URL = 'SUA_URL_DO_GOOGLE_APPS_SCRIPT_AQUI';
-
-        document.getElementById('clienteOcultoForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('submitBtn');
-            const msg = document.getElementById('message');
-            
-            if (SCRIPT_URL === 'SUA_URL_DO_GOOGLE_APPS_SCRIPT_AQUI') {
-                alert('Por favor, configure a URL do Google Apps Script no código HTML.');
-                return;
-            }
-
-            btn.disabled = true;
-            btn.innerText = 'Enviando...';
-            msg.style.display = 'none';
-
-            const formData = new FormData(this);
-            const data = {};
-            formData.forEach((value, key) => data[key] = value);
-
-            // Adiciona data/hora do envio
-            data.timestamp = new Date().toLocaleString('pt-BR');
-
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors', // Importante para evitar erros de CORS com Apps Script
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: new URLSearchParams(formData).toString()
-            })
-            .then(response => {
-                msg.innerText = 'Avaliação enviada com sucesso!';
-                msg.style.color = 'green';
-                msg.style.display = 'block';
-                this.reset();
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                msg.innerText = 'Erro ao enviar. Tente novamente.';
-                msg.style.color = 'red';
-                msg.style.display = 'block';
-            })
-            .finally(() => {
-                btn.disabled = false;
-                btn.innerText = 'Enviar Avaliação';
-            });
-        });
-    </script>
+const STEPS=[{id:'identificacao',label:'Identificação',icon:'📋'},{id:'previsita',label:'Pré-visita',icon:'📞'},{id:'chegada',label:'Chegada',icon:'🚪'},{id:'atendimento',label:'Atendimento',icon:'🤝'},{id:'execucao',label:'Serviço',icon:'⚙️'},{id:'ambiente',label:'Ambiente',icon:'🏪'},{id:'retencao',label:'Retenção',icon:'🔄'},{id:'digital',label:'Digital',icon:'📱'},{id:'resultado',label:'Resultado',icon:'📊'}];
+const SEGMENTOS=[{id:'salao',label:'Salão de Beleza',icon:'✂️'},{id:'clinica',label:'Clínica de Saúde',icon:'🏥'},{id:'varejo',label:'Varejo / Loja',icon:'🛍️'},{id:'supermercado',label:'Supermercado',icon:'🛒'},{id:'restaurante',label:'Restaurante',icon:'🍽️'},{id:'farmacia',label:'Farmácia',icon:'💊'},{id:'academia',label:'Academia',icon:'💪'},{id:'educacao',label:'Educação',icon:'📚'},{id:'servicos',label:'Serviços Gerais',icon:'🔧'},{id:'industria',label:'Indústria',icon:'🏭'}];
+const PESOS={previsita:10,chegada:10,atendimento:25,execucao:25,ambiente:10,retencao:15,digital:5};
+let state={step:0,segmento:null,dados:{empresa:'',data:'',hora:'',avaliador:'',servico:'',valor:'',turno:'',metodologia:''},scores:{previsita:{},chegada:{},atendimento:{},execucao:{},ambiente:{},retencao:{},digital:{}},notas:''};
+function getColorClass(s){if(s>=85)return'concept-excelente';if(s>=70)return'concept-bom';if(s>=50)return'concept-regular';return'concept-critico'}
+function getConceito(s){if(s>=85)return'EXCELENTE';if(s>=70)return'BOM';if(s>=50)return'REGULAR';return'CRÍTICO'}
+function getOptClass(s){if(s>=.8)return'sel-best';if(s>=.6)return'sel-good';if(s>=.4)return'sel-warn';return'sel-crit'}
+function calcSection(sec){const v=Object.values(state.scores[sec]);if(!v.length)return 0;return Math.round(v.reduce((a,b)=>a+b,0)/v.length*10)}
+function calcTotal(){let t=0,m=0;for(const[s,p]of Object.entries(PESOS)){t+=calcSection(s)*p;m+=p}return Math.round(t/m)}
+function renderStepsNav(){document.getElementById('stepsNav').innerHTML=STEPS.map((s,i)=>{let c=i===state.step?'active':i<state.step?'done':'';return`<div class="vl-step-pill ${c}" onclick="goStep(${i})"><span class="vl-step-num">${i<state.step?'✓':i+1}</span>${s.label}</div>`}).join('')}
+function updateProgress(){document.getElementById('progressFill').style.width=(state.step/(STEPS.length-1)*100)+'%'}
+function renderOpts(sec,crit,opts){const cur=state.scores[sec][crit];return`<div class="vl-rating-grid">${opts.map(o=>{const isSel=cur!==undefined&&Math.round(cur*10)===o.v;const cls=isSel?getOptClass(o.v/10):'';return`<button class="vl-opt ${isSel?'sel '+cls:''}" onclick="setScore('${sec}','${crit}',${o.v/10})">${o.l}</button>`}).join('')}</div>`}
+function setScore(sec,crit,val){state.scores[sec][crit]=val;renderMain()}
+function renderCrit(sec,label,crit,hint,opts){const s=state.scores[sec][crit];const badge=s!==undefined?`<span class="vl-score-badge">${Math.round(s*10)}</span>`:'';return`<div class="vl-card"><div class="vl-card-label">${label} ${badge}<span style="font-size:10px;color:#a0937a;font-weight:400">${hint}</span></div><div class="vl-card-body">${renderOpts(sec,crit,opts)}</div></div>`}
+const SG=[{l:'Péssimo (0)',v:0},{l:'Ruim (2)',v:2},{l:'Regular (5)',v:5},{l:'Bom (7)',v:7},{l:'Muito Bom (8)',v:8},{l:'Excelente (10)',v:10}];
+const SN=[{l:'Não (0)',v:0},{l:'Parcialmente (5)',v:5},{l:'Sim (10)',v:10}];
+const ST=[{l:'Não respondeu',v:0},{l:'>24h',v:1},{l:'Mesmo dia',v:6},{l:'<2h',v:8},{l:'Imediato',v:10}];
+const SE=[{l:'>30min',v:0},{l:'20min',v:2},{l:'15min',v:4},{l:'10min',v:6},{l:'5min',v:8},{l:'<2min',v:10}];
+function selectSeg(id){state.segmento=id;renderMain()}
+function setDado(k,v){state.dados[k]=v}
+function nextStep(){if(state.step<STEPS.length-1){state.step++;renderMain();window.scrollTo(0,0)}}
+function prevStep(){if(state.step>0){state.step--;renderMain();window.scrollTo(0,0)}}
+function goStep(i){if(i<=state.step){state.step=i;renderMain();window.scrollTo(0,0)}}
+async function sendToSheet(){
+  const total=calcTotal();
+  const payload={timestamp:new Date().toLocaleString('pt-BR'),segmento:state.segmento,...state.dados,scores:state.scores,sectionScores:{previsita:calcSection('previsita'),chegada:calcSection('chegada'),atendimento:calcSection('atendimento'),execucao:calcSection('execucao'),ambiente:calcSection('ambiente'),retencao:calcSection('retencao'),digital:calcSection('digital')},notaFinal:total,conceito:getConceito(total),observacoes:state.notas};
+  const all=JSON.parse(localStorage.getItem('valorClienteOculto')||'[]');all.push(payload);localStorage.setItem('valorClienteOculto',JSON.stringify(all));
+  if(!WEB_APP_URL){alert('⚠️ Configure o WEB_APP_URL com a URL do Google Apps Script. Dados salvos localmente.');return}
+  try{await fetch(WEB_APP_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)});alert('✅ Avaliação enviada com sucesso para Google Sheets!')}catch(e){alert('Erro ao enviar. Dados salvos localmente.')}
+}
+function renderMain(){
+  renderStepsNav();updateProgress();
+  const content=document.getElementById('mainContent');
+  const step=STEPS[state.step].id;
+  if(step==='identificacao'){content.innerHTML=`<div class="vl-section-header"><div class="vl-section-icon">📋</div><div><div class="vl-section-title">Identificação da Avaliação</div><div class="vl-section-desc">Dados básicos da visita de cliente oculto</div></div></div><div style="margin-bottom:20px"><div style="font-size:11px;font-weight:600;color:var(--valor-mid);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">Segmento do Negócio</div><div class="vl-type-selector">${SEGMENTOS.map(s=>`<div class="vl-type-card ${state.segmento===s.id?'sel':''}" onclick="selectSeg('${s.id}')"><div class="vl-type-icon">${s.icon}</div><div class="vl-type-label">${s.label}</div></div>`).join('')}</div></div><div class="vl-divider"></div><div class="vl-field-row"><div class="vl-field"><label>Nome do Estabelecimento *</label><input type="text" value="${state.dados.empresa}" oninput="setDado('empresa',this.value)" placeholder="Ex: Casa da Rara"></div><div class="vl-field"><label>Serviço/Produto Avaliado *</label><input type="text" value="${state.dados.servico}" oninput="setDado('servico',this.value)" placeholder="Ex: Corte + Hidratação"></div></div><div class="vl-field-row"><div class="vl-field"><label>Data da Visita *</label><input type="date" value="${state.dados.data}" oninput="setDado('data',this.value)"></div><div class="vl-field"><label>Horário de Chegada *</label><input type="time" value="${state.dados.hora}" oninput="setDado('hora',this.value)"></div></div><div class="vl-field-row"><div class="vl-field"><label>Turno da Visita</label><select oninput="setDado('turno',this.value)"><option value="">Selecione...</option><option>Manhã (08h-12h)</option><option>Almoço (12h-14h)</option><option>Tarde (14h-18h)</option><option>Noite (18h-22h)</option></select></div><div class="vl-field"><label>Valor Cobrado (R$)</label><input type="number" value="${state.dados.valor}" oninput="setDado('valor',this.value)" placeholder="0,00"></div></div><div class="vl-field-row"><div class="vl-field"><label>Nome do Avaliador</label><input type="text" value="${state.dados.avaliador}" oninput="setDado('avaliador',this.value)" placeholder="Seu nome ou código"></div><div class="vl-field"><label>Metodologia de Visita</label><select oninput="setDado('metodologia',this.value)"><option value="">Selecione...</option><option>Walk-in (sem agendamento)</option><option>Agendamento prévio</option><option>Agendamento por app</option><option>Pedido online/delivery</option></select></div></div><div class="vl-nav"><div style="font-size:11px;color:var(--valor-light)">Campos com * são obrigatórios</div><button class="vl-btn vl-btn-primary" onclick="nextStep()">Próximo →</button></div>`}
+  else if(step==='previsita'){content.innerHTML=`<div class="vl-section-header"><div class="vl-section-icon">📞</div><div><div class="vl-section-title">Pré-visita & Agendamento <span class="vl-seg">10%</span></div><div class="vl-section-desc">Como o cliente é atendido antes mesmo de chegar ao estabelecimento</div></div></div>${renderCrit('previsita','Facilidade de Contato / Agendamento','contato','Telefone, WhatsApp, app, site',[{l:'Impossível (0)',v:0},{l:'Muito difícil (2)',v:2},{l:'Com dificuldade (5)',v:5},{l:'Fácil (7)',v:7},{l:'Muito fácil (9)',v:9},{l:'Excelente (10)',v:10}])}${renderCrit('previsita','Tempo de Resposta ao Contato','resposta','Retorno em quanto tempo?',ST)}${renderCrit('previsita','Qualidade do Atendimento Remoto','atend_remoto','Tom de voz, clareza, cordialidade',SG)}${renderCrit('previsita','Informações Prestadas','informacoes','Preço, tempo, local, como chegar',SN)}${renderCrit('previsita','Confirmação / Lembrete do Agendamento','confirmacao','Recebeu confirmação?',[{l:'Nenhum (0)',v:0},{l:'Só confirmou (5)',v:5},{l:'Confirmou + Lembrete (10)',v:10}])}<div class="vl-nav"><button class="vl-btn" onclick="prevStep()">← Anterior</button><div style="text-align:center"><div style="font-size:11px;color:var(--valor-light)">Pré-visita</div><div style="font-size:18px;font-weight:600;color:var(--valor-dark)">${calcSection('previsita')}/100</div></div><button class="vl-btn vl-btn-primary" onclick="nextStep()">Próximo →</button></div>`}
+  else if(step==='chegada'){content.innerHTML=`<div class="vl-section-header"><div class="vl-section-icon">🚪</div><div><div class="vl-section-title">Chegada & Primeiro Impacto <span class="vl-seg">10%</span></div><div class="vl-section-desc">Os primeiros 30 segundos definem 60% da percepção do cliente</div></div></div>${renderCrit('chegada','Acesso e Estacionamento','acesso','Facilidade de chegar, sinalização',[{l:'Péssimo',v:0},{l:'Ruim',v:3},{l:'Adequado',v:6},{l:'Bom',v:8},{l:'Excelente',v:10}])}${renderCrit('chegada','Fachada e Sinalização Externa','fachada','Limpeza, clareza, atratividade',SG)}${renderCrit('chegada','Tempo de Espera até Atendimento','espera','A partir do momento em que entrou',SE)}${renderCrit('chegada','Forma do Acolhimento Inicial','acolhimento','Cumprimento, olho no olho, interesse',SG)}${renderCrit('chegada','Ambiente de Espera','sala_espera','Assentos, água/café, limpeza',[{l:'Inexistente',v:0},{l:'Inadequado',v:3},{l:'Básico',v:6},{l:'Bom',v:8},{l:'Confortável',v:10}])}<div class="vl-nav"><button class="vl-btn" onclick="prevStep()">← Anterior</button><div style="text-align:center"><div style="font-size:11px;color:var(--valor-light)">Chegada</div><div style="font-size:18px;font-weight:600;color:var(--valor-dark)">${calcSection('chegada')}/100</div></div><button class="vl-btn vl-btn-primary" onclick="nextStep()">Próximo →</button></div>`}
+  else if(step==='atendimento'){content.innerHTML<`<div class="vl-section-header"><div class="vl-section-icon">🤝</div><div><div class="vl-section-title">Qualidade do Atendimento <span class="vl-seg">25%</span></div><div class="vl-section-desc">A dimensão com maior peso — onde se ganha ou perde o cliente</div></div></div>${renderCrit('atendimento','Apresentação do Atendente','apresentacao','Nome, uniforme, postura profissional',SG)}${renderCrit('atendimento','Levantamento de Necessidades','diagnostico','Perguntou antes de sugerir?',SG)}${renderCrit('atendimento','Conhecimento Técnico Demonstrado','conhecimento','Soube responder dúvidas?',SG)}${renderCrit('atendimento','Comunicação e Linguagem','comunicacao','Clareza, vocabulário, tom de voz',SG)}${renderCrit('atendimento','Empatia e Personalização','empatia','Tratou pelo nome? Personalizou?',SG)}${renderCrit('atendimento','Oferta de Serviços Adicionais (Upsell)','upsell','Sugeriu complementos?',[{l:'Não ofereceu',v:0},{l:'Forçado',v:3},{l:'Mencionou',v:6},{l:'Natural e pertinente',v:10}])}${renderCrit('atendimento','Clareza de Preços e Condições','precos','Informou antes? Surpresa na cobrança?',SG)}<div class="vl-nav"><button class="vl-btn" onclick="prevStep()">← Anterior</button><div style="text-align:center"><div style="font-size:11px;color:var(--valor-light)">Atendimento</div><div style="font-size:18px;font-weight:600;color:var(--valor-dark)">${calcSection('atendimento')}/100</div></div><button class="vl-btn vl-btn-primary" onclick="nextStep()">Próximo →</button></div>`}
+  else if(step==='execucao'){content.innerHTML=`<div class="vl-section-header"><div class="vl-section-icon">⚙️</div><div><div class="vl-section-title">Serviço / Produto Entregue <span class="vl-seg">25%</span></div><div class="vl-section-desc">A qualidade técnica do que foi efetivamente entregue ao cliente</div></div></div>${renderCrit('execucao','Qualidade Técnica da Entrega','qualidade_tecnica','Resultado correspondeu ao prometido?',SG)}${renderCrit('execucao','Aderência às Expectativas','expectativas','Cliente saiu com o que desejava?',SG)}${renderCrit('execucao','Higiene e Biossegurança','higiene','Ferramentas, EPI, protocolos',[{l:'Ausente',v:0},{l:'Parcial',v:4},{l:'Adequado',v:7},{l:'Exemplar',v:10}])}${renderCrit('execucao','Qualidade dos Materiais/Produtos','materiais','Marca, validade, adequação',[{l:'Duvidosa',v:0},{l:'Básica',v:4},{l:'Boa',v:7},{l:'Premium',v:10}])}${renderCrit('execucao','Gestão do Tempo de Execução','tempo_exec','Entregou no prazo prometido?',[{l:'Muito atrasado',v:0},{l:'Atrasou >20min',v:3},{l:'Atrasou <10min',v:6},{l:'Pontual',v:10}])}${renderCrit('execucao','Acompanhamento Durante Execução','acompanhamento','Verificou satisfação no meio?',SG)}${renderCrit('execucao','Apresentação Final','apresentacao_final','Mostrou resultado, pediu feedback?',SG)}<div class="vl-nav"><button class="vl-btn" onclick="prevStep()">← Anterior</button><div style="text-align:center"><div style="font-size:11px;color:var(--valor-light)">Execução</div><div style="font-size:18px;font-weight:600;color:var(--valor-dark)">${calcSection('execucao')}/100</div></div><button class="vl-btn vl-btn-primary" onclick="nextStep()">Próximo →</button></div>`}
+  else if(step==='ambiente'){content.innerHTML<`<div class="vl-section-header"><div class="vl-section-icon">🏪</div><div><div class="vl-section-title">Ambiente & Estrutura Física <span class="vl-seg">10%</span></div><div class="vl-section-desc">O espaço físico comunica a qualidade do negócio antes de qualquer palavra</div></div></div>${renderCrit('ambiente','Limpeza Geral do Espaço','limpeza','Piso, paredes, banheiro, prateleiras',SG)}${renderCrit('ambiente','Organização Visual e Layout','organizacao','Fluxo, produto exposto, estética',SG)}${renderCrit('ambiente','Iluminação','iluminacao','Natural e artificial adequadas',SG)}${renderCrit('ambiente','Temperatura e Conforto Térmico','temperatura','Climatização compatível',SG)}${renderCrit('ambiente','Som Ambiente / Ruído','som','Volume, estilo, ruído',[{l:'Insuportável',v:0},{l:'Inadequado',v:3},{l:'Neutro',v:6},{l:'Agradável',v:10}])}${renderCrit('ambiente','Estado de Conservação','mobiliario','Equipamentos, mesas, cadeiras',SG)}<div class="vl-nav"><button class="vl-btn" onclick="prevStep()">← Anterior</button><div style="text-align:center"><div style="font-size:11px;color:var(--valor-light)">Ambiente</div><div style="font-size:18px;font-weight:600;color:var(--valor-dark)">${calcSection('ambiente')}/100</div></div><button class="vl-btn vl-btn-primary" onclick="nextStep()">Próximo →</button></div>`}
+  else if(step==='retencao'){content.innerHTML=`<div class="vl-section-header"><div class="vl-section-icon">🔄</div><div><div class="vl-section-title">Retenção & Pós-Venda <span class="vl-seg">15%</span></div><div class="vl-section-desc">O negócio que não retém paga duas vezes para conquistar o mesmo cliente</div></div></div>${renderCrit('retencao','Orientação Pós-Serviço','orientacao_pos','Explicou como usar/manter o resultado?',SN)}${renderCrit('retencao','Convite para Retornar','fidelizacao','Agendamento do próximo atendimento',[{l:'Não mencionou',v:0},{l:'Mencionou',v:5},{l:'Agendou na hora',v:10}])}${renderCrit('retencao','Programa de Fidelidade','programa_fidelidade','Cartão, desconto progressivo',[{l:'Inexistente',v:0},{l:'Existe mas não promoveu',v:4},{l:'Apresentou',v:7},{l:'Inscreveu o cliente',v:10}])}${renderCrit('retencao','Coleta de Feedback','feedback','Perguntou se gostou?',SN)}${renderCrit('retencao','Despedida e Encerramento','despedida','Agradecimento, cordialidade',SG)}${renderCrit('retencao','Formas de Pagamento','pagamento','Informou com antecedência? Pix, cartão?',SG)}<div class="vl-nav"><button class="vl-btn" onclick="prevStep()">← Anterior</button><div style="text-align:center"><div style="font-size:11px;color:var(--valor-light)">Retenção</div><div style="font-size:18px;font-weight:600;color:var(--valor-dark)">${calcSection('retencao')}/100</div></div><button class="vl-btn vl-btn-primary" onclick="nextStep()">Próximo →</button></div>`}
+  else if(step==='digital'){content.innerHTML=`<div class="vl-section-header"><div class="vl-section-icon">📱</div><div><div class="vl-section-title">Presença Digital & Reputação <span class="vl-seg">5%</span></div><div class="vl-section-desc">O cliente forma opinião antes de chegar — e compartilha depois que sai</div></div></div>${renderCrit('digital','Convite para Avaliar no Google','google_review','Pediu avaliação? QR Code?',[{l:'Não mencionou',v:0},{l:'Mencionou',v:5},{l:'Facilitou (QR/link)',v:10}])}${renderCrit('digital','Redes Sociais Promovidas','redes_sociais','Instagram no balcão, cartão, embalagem',[{l:'Sem menção',v:0},{l:'Existe mas não promoveu',v:4},{l:'Mencionou',v:7},{l:'Promoveu ativamente',v:10}])}${renderCrit('digital','WhatsApp Business','whatsapp','Número informado? Responde rápido?',SN)}${renderCrit('digital','Material de Contato','cartao','Entregou cartão ou brinde?',[{l:'Nada',v:0},{l:'Só cartão',v:5},{l:'Cartão + material',v:10}])}<div class="vl-nav"><button class="vl-btn" onclick="prevStep()">← Anterior</button><div style="text-align:center"><div style="font-size:11px;color:var(--valor-light)">Digital</div><div style="font-size:18px;font-weight:600;color:var(--valor-dark)">${calcSection('digital')}/100</div></div><button class="vl-btn vl-btn-primary" onclick="nextStep()">Próximo →</button></div>`}
+  else if(step==='resultado'){
+    const total=calcTotal();const conceito=getConceito(total);const cc=getColorClass(total);
+    const dims=[{label:'Pré-visita',key:'previsita',peso:'10%'},{label:'Chegada',key:'chegada',peso:'10%'},{label:'Atendimento',key:'atendimento',peso:'25%'},{label:'Execução',key:'execucao',peso:'25%'},{label:'Ambiente',key:'ambiente',peso:'10%'},{label:'Retenção',key:'retencao',peso:'15%'},{label:'Digital',key:'digital',peso:'5%'}];
+    function gi(score,dims){let actions=[];if(calcSection('previsita')<60)actions.push('Estruturar canais de agendamento com WhatsApp Business e resposta rápida.');if(calcSection('chegada')<60)actions.push('Implementar protocolo de acolhimento nos primeiros 30 segundos de contato.');if(calcSection('atendimento')<60)actions.push('Treinamento comportamental da equipe: escuta ativa, empatia e apresentação pessoal.');if(calcSection('execucao')<60)actions.push('Padronizar entrega com checklist de qualidade por serviço e apresentação do resultado.');if(calcSection('ambiente')<60)actions.push('Revisão do ambiente físico: higiene, iluminação e organização visual.');if(calcSection('retencao')<60)actions.push('Implantar protocolo de pós-venda: orientação, convite para retorno e feedback.');if(calcSection('digital')<60)actions.push('Ativar presença digital: avaliações Google, QR Code e WhatsApp Business.');const base=score>=85?'Negócio com desempenho excepcional. Foco em capturar avaliações e expandir base ativa.':score>=70?'Desempenho sólido com oportunidades específicas de melhoria.':score>=50?'Lacunas operacionais relevantes. Plano de ação de 30 dias recomendado.':'Situação crítica. Intervenção consultiva imediata recomendada.';return`<div style="font-size:13px;color:var(--valor-mid);line-height:1.6;margin-bottom:12px">${base}</div>${actions.slice(0,score<50?7:4).map(a=>`<div class="vl-action-item"><span class="vl-action-bullet">→</span><span>${a}</span></div>`).join('')}`}
+    content.innerHTML=`<div class="vl-section-header"><div class="vl-section-icon">📊</div><div><div class="vl-section-title">Resultado da Avaliação</div><div class="vl-section-desc">${state.dados.empresa||'Estabelecimento'} · ${state.dados.servico||'Serviço'} · ${state.dados.data||''}</div></div></div><div class="vl-score-panel"><div class="vl-score-grid"><div style="text-align:center"><div class="vl-big-num">${total}</div><div class="vl-big-label">Nota Ponderada</div><div class="vl-big-concept ${cc}">${conceito}</div></div><div>${dims.map(d=>{const s=calcSection(d.key);return`<div class="vl-dim-row"><div class="vl-dim-name">${d.label} <span style="color:rgba(255,255,255,.3);font-size:9px">${d.peso}</span></div><div class="vl-dim-bar-bg"><div class="vl-dim-bar-fill" style="width:${s}%"></div></div><div class="vl-dim-score">${s}</div></div>`}).join('')}</div></div></div><div class="vl-insight"><div class="vl-insight-title">📌 Parecer Consultivo — Valor Soluções</div><div class="vl-insight-body">${gi(total,dims)}</div></div><div class="vl-card"><div class="vl-card-label">Observações e Percepções Adicionais</div><div class="vl-card-body"><div class="vl-field"><textarea class="vl-textarea" id="notasFinais" placeholder="Anote qualquer detalhe: atitudes, palavras, situações incomuns, sugestões livres..." oninput="state.notas=this.value">${state.notas}</textarea></div></div></div><div class="vl-nav"><button class="vl-btn" onclick="prevStep()">← Revisar</button><button class="vl-btn vl-btn-gold" onclick="sendToSheet()">✓ Enviar para Planilha</button></div>`}
+}
+const today=new Date().toISOString().split('T')[0];state.dados.data=today;renderMain();
+</script>
 </body>
 </html>
