@@ -1,7 +1,168 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cliente Oculto — Valor Soluções Empresariais</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Cliente Oculto</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #message {
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cliente Oculto</h1>
+        <form id="clienteOcultoForm">
+            <div class="form-group">
+                <label for="nome">Nome do Avaliador:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Seu Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="data">Data da Visita:</label>
+                <input type="date" id="data" name="data" required>
+            </div>
+            <div class="form-group">
+                <label for="unidade">Unidade Visitada:</label>
+                <input type="text" id="unidade" name="unidade" required>
+            </div>
+            <div class="form-group">
+                <label for="nota">Nota de 1 a 5:</label>
+                <select id="nota" name="nota" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">1 - Muito Ruim</option>
+                    <option value="2">2 - Ruim</option>
+                    <option value="3">3 - Regular</option>
+                    <option value="4">4 - Bom</option>
+                    <option value="5">5 - Excelente</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="comentario">Comentários:</label>
+                <textarea id="comentario" name="comentario" required></textarea>
+            </div>
+            <button type="submit" id="submitBtn">Enviar Avaliação</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // SUBSTITUA A URL ABAIXO PELA URL DO SEU GOOGLE APPS SCRIPT APÓS PUBLICAR
+        const SCRIPT_URL = 'SUA_URL_DO_GOOGLE_APPS_SCRIPT_AQUI';
+
+        document.getElementById('clienteOcultoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const msg = document.getElementById('message');
+            
+            if (SCRIPT_URL === 'SUA_URL_DO_GOOGLE_APPS_SCRIPT_AQUI') {
+                alert('Por favor, configure a URL do Google Apps Script no código HTML.');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = 'Enviando...';
+            msg.style.display = 'none';
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            // Adiciona data/hora do envio
+            data.timestamp = new Date().toLocaleString('pt-BR');
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Importante para evitar erros de CORS com Apps Script
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(response => {
+                msg.innerText = 'Avaliação enviada com sucesso!';
+                msg.style.color = 'green';
+                msg.style.display = 'block';
+                this.reset();
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                msg.innerText = 'Erro ao enviar. Tente novamente.';
+                msg.style.color = 'red';
+                msg.style.display = 'block';
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.innerText = 'Enviar Avaliação';
+            });
+        });
+    </script>
+</body>
+</html>
